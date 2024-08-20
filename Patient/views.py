@@ -22,6 +22,11 @@ from email.mime.multipart import MIMEMultipart
 # import sendgrid
 import random
 
+
+
+#----------------------------------------------------------get_token_from_request----------------------------
+
+
 def get_token_from_request(request):
     auth_header = request.headers.get("Authorization")
     if not auth_header:
@@ -34,7 +39,7 @@ def get_token_from_request(request):
     
 
 
-
+#----------------------------------------------create patient---------------------------------------------
 
 @api_view(["POST"])
 def create_patient(request):
@@ -49,6 +54,7 @@ def create_patient(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+#-----------------------------------------------------get all patient--------------------------------------
 
 
 @api_view(["GET"])
@@ -58,6 +64,7 @@ def get_all_patients(request):
     return Response(serializer.data)
 
 
+#------------------------------------------------------get patient by id------------------------------------------
 
 # @api_view(["GET"])
 # def get_patient_by_id(request):
@@ -130,7 +137,7 @@ def get_patient_by_id(request):
     return Response(serializer.data)
 
 
-
+#------------------------------------------------------------------update patient-----------------------------
 
 @api_view(["PUT"])
 def update_patient(request):
@@ -194,6 +201,11 @@ def update_patient(request):
 #         return Response(serializer.data)
     
 #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+#------------------------------------------------------delete patient-----------------------------------------
+
+
     
 @api_view(["DELETE"])
 def delete_patient(request):
@@ -225,6 +237,7 @@ def delete_patient(request):
     )
 
 
+#-----------------------------------------------------generate otp ----------------------------------
 
 @api_view(["POST"])
 def generate_otp(request):
@@ -247,7 +260,10 @@ def generate_otp(request):
 
     return Response({"message": "OTP sent successfully"}, status=status.HTTP_200_OK)
 
-    
+
+
+#------------------------------------------------verify otp-------------------------------------------
+
 
 @api_view(["POST"])
 def verify_otp(request):
@@ -265,6 +281,8 @@ def verify_otp(request):
     return Response({"message": "Invalid OTP"}, status=status.HTTP_400_BAD_REQUEST)
 
 
+
+#--------------------------------------------------------logging-----------------------------------
 
 # @api_view(["POST"])
 # def login(request):
@@ -331,6 +349,7 @@ def login(request):
         )
 
 
+#------------------------------------------------- forget password----------------------------------------
 
 @api_view(["POST"])
 def forgot_password(request):
@@ -349,6 +368,7 @@ def forgot_password(request):
 
 
 
+#---------------------------------------------decode token -------------------------------------------------  
 
 
 @api_view(["POST"])
